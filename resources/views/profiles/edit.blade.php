@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <form action="/profile/{{ $user->id }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('Patch')
@@ -57,13 +56,9 @@
                     @enderror
                 </div>
             </div>
-
-           
             <div class="row pt-4">
                 <button class="btn btn-primary">Save Profile</button>
             </div>
         </div>
-        
     </form>
-</div>
 @endsection

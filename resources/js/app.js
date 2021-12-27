@@ -23,6 +23,7 @@ Vue.component(
     "follow-button",
     require("./components/FollowButton.vue").default
 );
+Vue.component("post", require("./components/Post.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

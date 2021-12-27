@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <div class="row">
         <div class="col-8">
-            <img src="/storage/{{ $post->image }}" alt="" class="w-100">
+            <img src="/storage/{{ $post->image }}" alt="{{ $post->caption }}" class="w-100">
         </div>
         <div class="col-4">
             <div>
@@ -19,17 +18,17 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <div><strong><a style="text-decoration: none" href="#">Follow</a></strong></div>
+                    @cannot('update', $post->user->profile)                        
+                        <follow-button user_id='{{ $post->user->id }}' follows='{{ $follows }}'></follow-button>
+                    @endcannot
                 </div>  
             </div>          
             <p class="pt-4">
-                <a style="text-decoration: none" href="/profile/{{ $post->user->id }}">
-                    <span class="pe-1 text-dark"><strong>{{ $post->user->username }}</strong></span>
-                </a>
-                <span>{{ $post->caption }}</span>
+                <p class="fs-5">{{ $post->caption }}</p>
+                @can('update', $post->user->profile)                        
+                    <a href="/post/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
+                @endcan
             </p>
         </div>
     </div>   
-</div>
 @endsection

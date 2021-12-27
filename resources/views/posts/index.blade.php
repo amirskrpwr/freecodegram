@@ -1,28 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    @foreach ($posts as $post) 
-        <div class="row">
-            <div class="col-6 offset-3">
-                <img src="/storage/{{ $post->image }}" alt="" class="w-100">
-            </div>
-            <div class="col-6 offset-3">         
-                <p class="pt-2">
-                    <a style="text-decoration: none" href="/profile/{{ $post->user->id }}">
-                        <span class="pe-1 text-dark"><strong>{{ $post->user->username }}</strong></span>
-                    </a>
-                    <span>{{ $post->caption }}</span>
-                </p>
-            </div>
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+        <h2 class="d-flex justify-content-center mb-5">Profiles</h2>
+        @foreach ($profiles as $profile)
+        <div class="pb-2 mb-2">
+            <a href="/profile/{{ $profile->id }}" style="text-decoration: none; color:black">
+                <img src="{{ $profile->profileImage() }}" class="rounded-circle w-100 me-2" style="max-width: 50px" alt="{{ $profile->title }}">
+                <span>{{ $profile->title }}</span>
+            </a>
         </div>
-    @endforeach   
+            
+        @endforeach
+    </div>
+    <div class="col-md-8 col-sm-12">
+        <h2 class="d-flex justify-content-center mb-5">Posts</h2>
+        @foreach ($posts as $post) 
+            <post :post='@json($post)'></post>
+        @endforeach   
 
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center" >
-            {{ $posts->links("pagination::bootstrap-4") }}
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center" >
+                {{ $posts->links("pagination::bootstrap-4") }}
+            </div>
         </div>
     </div>
 </div>
+    
 @endsection
     
